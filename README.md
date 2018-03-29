@@ -12,3 +12,7 @@ tm-node -o foo \
   -d /path/to/art/resources2/ \
   -e png -e jpg
 ```
+
+## License
+
+MIT
