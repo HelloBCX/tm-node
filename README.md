@@ -7,7 +7,7 @@
 ## Usage
 
 ```
-./bin/texturemerger -o foo \
+tm-node -o foo \
   -d /path/to/art/resources1/ \
   -d /path/to/art/resources2/ \
   -e png -e jpg
