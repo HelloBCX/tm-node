@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const path = require('path')
+const minimist = require('minimist')
+const nm = require('..')
+
+const argv = minimist(process.argv.slice(2), {
+  alias: {
+    o: 'output',
+    d: 'directory',
+    e: 'ext',
+  },
+  default: {
+    d: [],
+    e: '.png',
+  },
+  string: ['o', 'd', 'e'],
+})
+
+if (!argv.output) {
+  console.error('-o is required')
+  process.exit(1)
+}
+
+if (argv.directory.length < 1) {
+  console.error('-d is required')
+  process.exit(1)
+}
+
+const allowedExts = (argv.e.map ? argv.e : [argv.e])
+  .map(i => i.replace(/^([^\.])/, (p) => `.${p}`))
+
+const dirs = (argv.d.map ? argv.d : [argv.d])
+  .map(p => fs.realpathSync(path.resolve(process.cwd(), p)))
+
+const files = nm.listDirs(dirs, allowedExts)
+
+nm.packFiles(files, argv.o, (err) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+
+  console.log('done')
+})

@@ -9,6 +9,7 @@
   "author": "hbc <me@hbc.rocks>",
   "license": "MIT",
   "dependencies": {
+    "minimist": "^1.2.0",
     "node-sprite-generator": "^0.10.2"
   }
 }
